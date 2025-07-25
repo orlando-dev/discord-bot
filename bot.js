@@ -1,9 +1,8 @@
 const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder } = require('discord.js');
 
-const token = process.env.BOT_TOKEN;
-const clientId = process.env.CLIENT_ID;
-const guildId = process.env.GUILD_ID;
-
+const TOKEN = process.env.BOT_TOKEN;
+const CLIENT_ID = process.env.CLIENT_ID;
+const GUILD_ID = process.env.GUILD_ID;
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds]
@@ -32,14 +31,14 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
       Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
       { body: commands }
     );
-    console.log('Comandos registrados com sucesso!');
+    console.log('✅ Comandos registrados com sucesso!');
   } catch (error) {
-    console.error(error);
+    console.error('❌ Erro ao registrar comandos:', error);
   }
 })();
 
 client.once('ready', () => {
-  console.log(`Bot ${client.user.tag} está online com Slash Commands!`);
+  console.log(`🤖 Bot ${client.user.tag} está online com Slash Commands!`);
 });
 
 client.on('interactionCreate', async interaction => {
